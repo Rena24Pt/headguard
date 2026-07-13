@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "headguard"
-version = "0.1.0"
+version = "1.0.0"
 description = "Scan a site's HTTP security headers (HSTS, CSP, X-Frame-Options, ...) and grade its hardening."
 readme = "README.md"
 license = { text = "MIT" }
@@ -16,7 +16,7 @@ dependencies = [
 ]
 keywords = ["security", "http", "headers", "csp", "hsts", "hardening", "scanner"]
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
     "Intended Audience :: Developers",
     "Intended Audience :: System Administrators",

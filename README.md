@@ -60,9 +60,13 @@ headguard example.com                 # scan (scheme defaults to https://)
 headguard https://example.com --json  # machine-readable output
 headguard example.com --min-grade B   # exit 1 if grade is below B (CI gate)
 headguard internal.host --insecure    # skip TLS verification
+headguard site1.com site2.com s3.com  # batch mode: parallel scans, comparison table
 ```
 
-Exit codes: `0` success, `1` grade below `--min-grade`, `2` network/scan error.
+Batch mode scans URLs concurrently and prints a comparison table; `--json` then
+returns an array, and `--min-grade` applies to every result.
+
+Exit codes: `0` success, `1` a grade below `--min-grade`, `2` network/scan error.
 
 ### CI example (GitHub Actions)
 
@@ -116,7 +120,7 @@ all scanning and grading logic.
 - [x] CLI with grade, colored report and JSON output
 - [x] Web interface (FastAPI) on top of the same scanner core, with SSRF protection
 - [x] `Set-Cookie` attribute analysis (`Secure`, `HttpOnly`, `SameSite`)
-- [ ] Batch scanning of multiple URLs
+- [x] Batch scanning of multiple URLs (parallel, with comparison table)
 
 ## Ethics
 
