@@ -132,6 +132,13 @@ Only scan sites you own or have permission to test. headguard sends a single
 ordinary GET request — the same as visiting the page in a browser — but the
 recommendations it produces are for hardening **your own** infrastructure.
 
+## Author
+
+**Renato Almeida** — [renatosec.dev](https://renatosec.dev) · [GitHub](https://github.com/Rena24Pt)
+
+Built to learn web security fundamentals hands-on: every check documents the
+attack it defends against.
+
 ## License
 
-MIT
+[MIT](LICENSE)
