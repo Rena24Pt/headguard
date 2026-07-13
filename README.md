@@ -2,9 +2,12 @@
 
 [![CI](https://github.com/Rena24Pt/headguard/actions/workflows/ci.yml/badge.svg)](https://github.com/Rena24Pt/headguard/actions/workflows/ci.yml)
 
-A command-line tool that scans a website's HTTP **security headers** — HSTS, CSP,
+A security tool that scans a website's HTTP **security headers** — HSTS, CSP,
 X-Frame-Options, Referrer-Policy, Permissions-Policy, COOP/CORP and more — and grades
 the site's hardening from **A+ to F**, with concrete recommendations for every gap.
+Available as a CLI and as a web interface, sharing the same scanner core.
+
+![headguard web interface showing a scan report with grade and findings](docs/web-scan.png)
 
 ```
 $ headguard example.com
@@ -78,6 +81,8 @@ The same scanner core, behind a small FastAPI app:
 pip install -e ".[web]"
 headguard-web            # serves http://127.0.0.1:8000
 ```
+
+![headguard web interface home page](docs/web-home.png)
 
 Security decisions worth noting (this is a security tool, after all):
 
