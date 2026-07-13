@@ -26,9 +26,11 @@ classifiers = [
 
 [project.scripts]
 headguard = "headguard.cli:main"
+headguard-web = "headguard.web.app:main"
 
 [project.optional-dependencies]
-dev = ["pytest>=8.0"]
+web = ["fastapi>=0.110", "uvicorn>=0.29"]
+dev = ["pytest>=8.0", "fastapi>=0.110", "uvicorn>=0.29"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/headguard"]

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>headguard — security headers analyzer</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>headguard</h1>
+      <p class="tagline">Scan a site's HTTP security headers and grade its hardening.</p>
+    </header>
+
+    <form id="scan-form" autocomplete="off">
+      <input id="url" name="url" type="text" placeholder="example.com"
+             required spellcheck="false" autofocus>
+      <button type="submit" id="scan-button">Scan</button>
+    </form>
+
+    <p id="error" class="error" hidden></p>
+
+    <section id="result" hidden>
+      <div class="summary">
+        <div id="grade" class="grade">?</div>
+        <div class="summary-text">
+          <div id="final-url" class="final-url"></div>
+          <div id="score" class="score"></div>
+        </div>
+      </div>
+
+      <table id="findings">
+        <thead>
+          <tr><th>Header</th><th>Result</th><th>Details</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <div id="recommendations"></div>
+    </section>
+
+    <footer>
+      <p>Same scanner core as the <code>headguard</code> CLI · results are advice, not an audit</p>
+    </footer>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>

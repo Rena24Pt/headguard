@@ -70,6 +70,31 @@ Exit codes: `0` success, `1` grade below `--min-grade`, `2` network/scan error.
     headguard https://myapp.example --min-grade A
 ```
 
+## Web interface
+
+The same scanner core, behind a small FastAPI app:
+
+```bash
+pip install -e ".[web]"
+headguard-web            # serves http://127.0.0.1:8000
+```
+
+Security decisions worth noting (this is a security tool, after all):
+
+- **SSRF protection** — the API refuses to scan loopback, private, link-local
+  and other non-public addresses, so a deployed instance cannot be used to
+  probe its operator's internal network or a cloud metadata endpoint.
+  (Known limitation: DNS rebinding between the guard's lookup and the actual
+  request is not mitigated.)
+- **It serves the headers it preaches** — scan it with its own CLI:
+  `headguard http://127.0.0.1:8000` (it loses only the HSTS points, which
+  belong at the TLS-terminating layer, not on a localhost dev server).
+- **XSS-safe rendering** — the frontend renders scan results with
+  `textContent`, never `innerHTML`: header values come from the scanned site
+  and are treated as hostile input.
+- **Binds to localhost by default** — exposing a URL-fetching service to a
+  network is an explicit choice (`--host`), not a default.
+
 ## Development
 
 ```bash
@@ -77,14 +102,14 @@ pip install -e ".[dev]"
 pytest
 ```
 
-The scanner core is decoupled from the CLI (`headguard.scanner.scan()` returns a
-plain `ScanResult`), so it can back other frontends — a web UI is the planned next
-step.
+The scanner core is decoupled from both frontends (`headguard.scanner.scan()`
+returns a plain `ScanResult`), which is what lets the CLI and the web app share
+all scanning and grading logic.
 
 ## Roadmap
 
 - [x] CLI with grade, colored report and JSON output
-- [ ] Web interface (FastAPI) on top of the same scanner core
+- [x] Web interface (FastAPI) on top of the same scanner core, with SSRF protection
 - [x] `Set-Cookie` attribute analysis (`Secure`, `HttpOnly`, `SameSite`)
 - [ ] Batch scanning of multiple URLs
 
