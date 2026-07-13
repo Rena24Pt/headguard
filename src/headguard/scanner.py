@@ -37,7 +37,11 @@ def scan(
 
     headers = {name.lower(): value for name, value in response.headers.items()}
     is_https = response.url.scheme == "https"
-    ctx = ScanContext(headers=headers, is_https=is_https)
+    ctx = ScanContext(
+        headers=headers,
+        is_https=is_https,
+        cookies=response.headers.get_list("set-cookie"),
+    )
 
     findings: list[Finding] = []
     if not is_https:

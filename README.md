@@ -25,7 +25,11 @@ protections. Each check in headguard maps a header to the attack it mitigates:
 | `Permissions-Policy` | Abuse of camera, mic, geolocation, ... | 10 |
 | `Cross-Origin-Opener-Policy` | XS-Leaks, tabnabbing | 5 |
 | `Cross-Origin-Resource-Policy` | Spectre-style cross-origin reads | 5 |
+| `Set-Cookie` attributes (`Secure`, `HttpOnly`, `SameSite`) | Session hijacking, token theft via XSS, CSRF | 10* |
 | No version disclosure (`Server`, `X-Powered-By`, ...) | CVE fingerprinting | 5 |
+
+\* Cookie points only enter the total when the response actually sets cookies —
+a site without cookies has nothing to protect and is not penalized.
 
 It also flags **deprecated headers** (`X-XSS-Protection`, `Expect-CT`,
 `Public-Key-Pins`) that should be removed, and warns when a CSP is weakened by
@@ -81,7 +85,7 @@ step.
 
 - [x] CLI with grade, colored report and JSON output
 - [ ] Web interface (FastAPI) on top of the same scanner core
-- [ ] `Set-Cookie` attribute analysis (`Secure`, `HttpOnly`, `SameSite`)
+- [x] `Set-Cookie` attribute analysis (`Secure`, `HttpOnly`, `SameSite`)
 - [ ] Batch scanning of multiple URLs
 
 ## Ethics

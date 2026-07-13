@@ -43,10 +43,13 @@ class ScanContext:
 
     ``headers`` uses lowercase keys — HTTP header names are case-insensitive,
     so the scanner normalizes them once instead of every check doing it.
+    ``cookies`` carries the raw Set-Cookie lines separately: it is the one
+    response header that may legally repeat, so it cannot live in the dict.
     """
 
     headers: dict[str, str]
     is_https: bool
+    cookies: list[str] = field(default_factory=list)
 
 
 @dataclass

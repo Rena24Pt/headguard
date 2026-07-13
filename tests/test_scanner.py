@@ -33,6 +33,22 @@ def test_scheme_defaults_to_https():
     assert result.final_url.startswith("https://")
 
 
+def test_repeated_set_cookie_headers_reach_the_check():
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(
+            200,
+            headers=[
+                ("Set-Cookie", "a=1"),
+                ("Set-Cookie", "b=2; Secure; HttpOnly; SameSite=Lax"),
+            ],
+        )
+
+    result = scan("https://example.test", transport=httpx.MockTransport(handler))
+    (cookie_finding,) = [f for f in result.findings if f.header == "Set-Cookie"]
+    assert cookie_finding.max_score == 10
+    assert "'a'" in cookie_finding.message
+
+
 def test_json_round_trip():
     result = scan("https://example.test", transport=_transport(HARDENED_HEADERS))
     data = result.to_dict()

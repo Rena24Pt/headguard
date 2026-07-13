@@ -3,6 +3,7 @@
 from . import (
     clickjacking,
     content_type,
+    cookies,
     cross_origin,
     csp,
     disclosure,
@@ -20,6 +21,7 @@ ALL_CHECKS = [
     referrer.check,
     permissions.check,
     cross_origin.check,
+    cookies.check,
     disclosure.check,
     legacy.check,
 ]
