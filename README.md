@@ -46,10 +46,14 @@ misconfigured (e.g. an HSTS `max-age` under six months).
 
 ## Install
 
+Works on Linux, macOS and Windows (tested on all three in CI).
+
 ```bash
 git clone https://github.com/Rena24Pt/headguard
 cd headguard
-python -m venv .venv && source .venv/bin/activate
+python -m venv .venv
+source .venv/bin/activate      # Linux/macOS
+# .venv\Scripts\activate       # Windows
 pip install -e .
 ```
 
