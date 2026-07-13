@@ -1,5 +1,7 @@
 # headguard
 
+[![CI](https://github.com/Rena24Pt/headguard/actions/workflows/ci.yml/badge.svg)](https://github.com/Rena24Pt/headguard/actions/workflows/ci.yml)
+
 A command-line tool that scans a website's HTTP **security headers** — HSTS, CSP,
 X-Frame-Options, Referrer-Policy, Permissions-Policy, COOP/CORP and more — and grades
 the site's hardening from **A+ to F**, with concrete recommendations for every gap.
@@ -38,7 +40,7 @@ misconfigured (e.g. an HSTS `max-age` under six months).
 ## Install
 
 ```bash
-git clone https://github.com/<you>/headguard
+git clone https://github.com/Rena24Pt/headguard
 cd headguard
 python -m venv .venv && source .venv/bin/activate
 pip install -e .
@@ -60,7 +62,7 @@ Exit codes: `0` success, `1` grade below `--min-grade`, `2` network/scan error.
 ```yaml
 - name: Check security headers
   run: |
-    pip install git+https://github.com/<you>/headguard
+    pip install git+https://github.com/Rena24Pt/headguard
     headguard https://myapp.example --min-grade A
 ```
 
